@@ -70,7 +70,7 @@ rules:
   verbs: ["create","delete","get","list","patch","update","watch"]
 - apiGroups: ["storage.k8s.io"]
   resources: ["storageclasses"]
-  verbs: ["get", "list"]
+  verbs: ["get", "list", "watch", "create", "delete", "patch", "update"]
 ---
 apiVersion: apps/v1
 kind: Deployment
