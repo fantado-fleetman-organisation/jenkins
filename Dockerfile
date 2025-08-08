@@ -24,7 +24,16 @@ RUN curl -fsSL https://get.docker.com -o get-docker.sh \
 RUN curl -LO "https://dl.k8s.io/release/$(curl -L -s https://dl.k8s.io/release/stable.txt)/bin/linux/amd64/kubectl" \
     && install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl \
     && rm kubectl
-    
+
+# Download and install AWS CLI v2
+RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "/tmp/awscliv2.zip" && \
+    unzip /tmp/awscliv2.zip -d /tmp && \
+    /tmp/aws/install && \
+    rm -rf /tmp/aws /tmp/awscliv2.zip
+
+# Confirm installation
+RUN aws --version
+
 # Install Jenkins plugins
 RUN jenkins-plugin-cli --plugins \
     "workflow-aggregator:latest" \
